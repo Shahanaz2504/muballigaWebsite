@@ -2,6 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>
+  // Identity invite/confirmation/recovery links land here by default.
+  // Bounce straight to the admin page (before any other script/CSS loads)
+  // so its Identity widget — not this busy homepage — handles the token.
+  if (/(?:invite_token|confirmation_token|recovery_token|email_change_token)=/.test(location.hash)) {
+    location.replace("/admin/reviews.html" + location.hash);
+  }
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Online Muballigha Course for Women | Shahanaz Begam Islamic Academy</title>
 <meta name="description" content="A certified, women-only online Muballigha course taught in Tamil — Quran Recitation, Tajweed, Surah Memorisation, Hadees, Fiqh & Akhlaq. Live classes via Google Meet, 8–9 PM. Admissions open.">
@@ -435,7 +443,5 @@
 </button>
 
 <script src="assets/app.js"></script>
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-<script src="assets/identity-bridge.js"></script>
 </body>
 </html>
