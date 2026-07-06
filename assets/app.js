@@ -48,35 +48,41 @@
     });
   });
 
-  /* Reviews: render approved reviews, or leave the "no reviews yet" message */
+  /* Reviews: fetch approved reviews from the Netlify Function, or leave the "no reviews yet" message */
   var reviewGrid = document.getElementById("review-grid");
   var reviewsEmptyMessage = document.getElementById("reviews-empty-message");
-  var reviews = window.STUDENT_REVIEWS || [];
 
-  if (reviewGrid && reviews.length) {
-    reviews.forEach(function (review) {
-      var rating = Math.max(0, Math.min(5, Number(review.rating) || 0));
+  if (reviewGrid) {
+    fetch("/.netlify/functions/reviews-public")
+      .then(function (res) { return res.ok ? res.json() : []; })
+      .then(function (reviews) {
+        if (!Array.isArray(reviews) || !reviews.length) return;
 
-      var card = document.createElement("div");
-      card.className = "review-card";
+        reviews.forEach(function (review) {
+          var rating = Math.max(0, Math.min(5, Number(review.rating) || 0));
 
-      var starsEl = document.createElement("div");
-      starsEl.className = "review-stars";
-      starsEl.textContent = "★★★★★☆☆☆☆☆".slice(5 - rating, 10 - rating);
-      starsEl.setAttribute("aria-label", rating + " out of 5 stars");
+          var card = document.createElement("div");
+          card.className = "review-card";
 
-      var textEl = document.createElement("p");
-      textEl.textContent = "“" + review.text + "”";
+          var starsEl = document.createElement("div");
+          starsEl.className = "review-stars";
+          starsEl.textContent = "★★★★★☆☆☆☆☆".slice(5 - rating, 10 - rating);
+          starsEl.setAttribute("aria-label", rating + " out of 5 stars");
 
-      var citeEl = document.createElement("cite");
-      citeEl.textContent = review.name;
+          var textEl = document.createElement("p");
+          textEl.textContent = "“" + review.text + "”";
 
-      card.append(starsEl, textEl, citeEl);
-      reviewGrid.appendChild(card);
-    });
+          var citeEl = document.createElement("cite");
+          citeEl.textContent = review.name;
 
-    reviewGrid.hidden = false;
-    if (reviewsEmptyMessage) reviewsEmptyMessage.hidden = true;
+          card.append(starsEl, textEl, citeEl);
+          reviewGrid.appendChild(card);
+        });
+
+        reviewGrid.hidden = false;
+        if (reviewsEmptyMessage) reviewsEmptyMessage.hidden = true;
+      })
+      .catch(function () { /* keep the default "no reviews yet" state */ });
   }
 
   /* Write-a-review form toggle */
@@ -105,7 +111,7 @@
 
   /* Scroll reveal for cards/sections */
   var revealTargets = document.querySelectorAll(
-    ".benefit-card, .subject-card, .schedule-card, .tutor-card, .review-card, .accordion-item, .hadith-card"
+    ".benefit-card, .subject-card, .schedule-card, .tutor-card, .accordion-item, .hadith-card"
   );
   revealTargets.forEach(function (el) { el.classList.add("reveal"); });
 

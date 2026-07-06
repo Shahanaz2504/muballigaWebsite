@@ -1,0 +1,103 @@
+.admin-body {
+  background: var(--cream-100);
+  min-height: 100vh;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: var(--cream-50);
+  border-bottom: 1px solid var(--cream-200);
+}
+
+.admin-main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem) 1.5rem 4rem;
+}
+
+.admin-card {
+  background: var(--white);
+  border: 1px solid var(--cream-200);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.8rem, 5vw, 2.6rem);
+  text-align: center;
+  box-shadow: var(--shadow-card);
+}
+.admin-card p { color: var(--ink-700); margin: 0.8rem 0 1.6rem; }
+
+.admin-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.admin-status {
+  font-size: 0.85rem;
+  color: var(--ink-500);
+  margin-bottom: 1.4rem;
+}
+
+.admin-empty {
+  color: var(--ink-500);
+  font-size: 0.95rem;
+  background: var(--white);
+  border: 1px dashed var(--cream-200);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  text-align: center;
+}
+
+.pending-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.pending-card {
+  background: var(--white);
+  border: 1px solid var(--cream-200);
+  border-radius: var(--radius-md);
+  padding: 1.5rem 1.7rem;
+  box-shadow: var(--shadow-card);
+}
+
+.pending-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+.pending-card-head strong { color: var(--green-900); font-family: var(--font-head); font-size: 1.05rem; }
+.pending-card-head time { font-size: 0.78rem; color: var(--ink-500); }
+
+.pending-card p {
+  color: var(--ink-700);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.pending-actions { display: flex; gap: 0.8rem; }
+
+.btn--approve { background: var(--green-800); color: var(--white); }
+.btn--approve:hover { background: var(--green-700); }
+
+.btn--reject {
+  background: transparent;
+  border: 2px solid var(--maroon-600);
+  color: var(--maroon-600);
+}
+.btn--reject:hover { background: rgba(156, 31, 84, 0.08); }
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+#admin-account .btn { padding: 0.5em 1.2em; font-size: 0.88rem; }

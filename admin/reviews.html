@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Review Moderation | Shahanaz Begam Islamic Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/admin.css">
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body class="admin-body">
+
+<header class="admin-header">
+  <span class="brand-text">
+    <strong>Shahanaz Begam</strong>
+    <em>Review Moderation</em>
+  </span>
+  <div id="admin-account"></div>
+</header>
+
+<main class="admin-main">
+
+  <section id="login-gate" class="admin-card">
+    <h1>Sign in to review submissions</h1>
+    <p>This page is only for the academy admin. Log in with your invited Netlify Identity account.</p>
+    <button class="btn btn--primary" id="login-btn" type="button">Log In</button>
+  </section>
+
+  <section id="admin-panel" class="admin-panel" hidden>
+    <div class="admin-panel-head">
+      <h1>Pending Reviews</h1>
+      <button class="btn btn--ghost" id="refresh-btn" type="button">Refresh</button>
+    </div>
+
+    <p id="admin-status" class="admin-status"></p>
+
+    <div id="pending-list" class="pending-list"></div>
+    <p id="empty-state" class="admin-empty" hidden>No reviews waiting for approval right now.</p>
+  </section>
+
+</main>
+
+<script src="../assets/admin.js"></script>
+</body>
+</html>
