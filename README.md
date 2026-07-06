@@ -36,6 +36,18 @@ immediately for the next visitor, with no rebuild or redeploy needed.
 There's no moderation queue, so anything submitted goes live right away
 (basic bot spam is still filtered by Netlify Forms' built-in honeypot field).
 
+### Deleting a spam or unwanted review
+
+Each review is stored as its own entry (blob), keyed by its id, in a store
+named `reviews`. To remove one:
+
+1. Netlify dashboard → your site → **Blobs**.
+2. Open the `reviews` store.
+3. Find the entry (you can open one to check its contents — name/text — to
+   identify the right one), then delete it.
+
+It disappears from the live page on the next page load — no redeploy needed.
+
 ## To do before launch
 
 - Replace the placeholder WhatsApp number (+91 99522 60891) if it changes.

@@ -20,10 +20,10 @@ export default async (req) => {
     submittedAt: new Date().toISOString(),
   };
 
+  // One blob per review (keyed by id) so a single spam entry can be deleted
+  // individually from the Blobs page in the Netlify dashboard.
   const store = getStore("reviews");
-  const approved = (await store.get("approved", { type: "json" })) || [];
-  approved.unshift(review);
-  await store.setJSON("approved", approved);
+  await store.setJSON(review.id, review);
 
   return new Response(null, { status: 200 });
 };

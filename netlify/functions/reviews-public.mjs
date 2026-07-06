@@ -1,11 +1,19 @@
 import { getStore } from "@netlify/blobs";
 
-// Public, unauthenticated: serves the approved reviews shown on the live page.
+// Public, unauthenticated: serves the reviews shown on the live page.
+// Each review is its own blob, keyed by id — deleting a spam entry from the
+// Blobs page in the Netlify dashboard removes it here on the next request.
 export default async () => {
   const store = getStore("reviews");
-  const approved = (await store.get("approved", { type: "json" })) || [];
+  const { blobs } = await store.list();
 
-  return new Response(JSON.stringify(approved), {
+  const reviews = (
+    await Promise.all(blobs.map(({ key }) => store.get(key, { type: "json" })))
+  ).filter(Boolean);
+
+  reviews.sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+
+  return new Response(JSON.stringify(reviews), {
     status: 200,
     headers: {
       "Content-Type": "application/json",
