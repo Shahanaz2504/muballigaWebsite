@@ -2,14 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<script>
-  // Identity invite/confirmation/recovery links land here by default.
-  // Bounce straight to the admin page (before any other script/CSS loads)
-  // so its Identity widget — not this busy homepage — handles the token.
-  if (/(?:invite_token|confirmation_token|recovery_token|email_change_token)=/.test(location.hash)) {
-    location.replace("/admin/reviews.html" + location.hash);
-  }
-</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Online Muballigha Course for Women | Shahanaz Begam Islamic Academy</title>
 <meta name="description" content="A certified, women-only online Muballigha course taught in Tamil — Quran Recitation, Tajweed, Surah Memorisation, Hadees, Fiqh & Akhlaq. Live classes via Google Meet, 8–9 PM. Admissions open.">
@@ -315,7 +307,7 @@
 
           <button type="submit" class="btn btn--gold">Submit Review</button>
         </form>
-        <p class="review-form-note">Reviews are read and approved by the academy before appearing on this page.</p>
+        <p class="review-form-note">Your review will appear on this page right after you submit it.</p>
       </div>
     </div>
   </section>

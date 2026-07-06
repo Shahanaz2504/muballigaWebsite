@@ -27,9 +27,9 @@ exports.handler = async (event) => {
   };
 
   const store = getStore("reviews");
-  const pending = (await store.get("pending", { type: "json" })) || [];
-  pending.push(review);
-  await store.setJSON("pending", pending);
+  const approved = (await store.get("approved", { type: "json" })) || [];
+  approved.unshift(review);
+  await store.setJSON("approved", approved);
 
   return { statusCode: 200, body: "ok" };
 };
