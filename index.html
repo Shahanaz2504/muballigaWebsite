@@ -266,17 +266,48 @@
   <section class="section reviews" id="reviews">
     <div class="section-inner">
       <p class="kicker">Student Reviews</p>
-      <h2>Our Story Is Just Beginning</h2>
-      <p class="section-lead">
-        Admissions have just opened, so our first batch is yet to graduate. Real stories from our students will
-        appear here soon, insha'Allah — for now, consider being part of writing them.
+      <h2>What Our Students Say</h2>
+      <p class="section-lead" id="reviews-empty-message">
+        Real stories from our students will appear here soon, insha'Allah — for now, consider being part of writing them.
       </p>
 
-      <div class="review-placeholder">
-        <svg width="34" height="34"><use href="#i-quote"/></svg>
-        <h3>Be Among Our First Students</h3>
-        <p>Join the founding batch and help shape this course from day one. Your feedback will be the first review featured here.</p>
-        <a class="btn btn--primary" href="#enroll">Reserve Your Seat</a>
+      <div class="review-grid" id="review-grid" hidden></div>
+
+      <div class="review-cta">
+        <button class="btn btn--ghost" id="review-toggle" type="button" aria-expanded="false" aria-controls="review-form-wrap">
+          Write a Review
+        </button>
+      </div>
+
+      <div class="review-form-wrap" id="review-form-wrap" hidden>
+        <form name="student-review" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="review-form" id="review-form">
+          <input type="hidden" name="form-name" value="student-review">
+          <p class="hp-field"><label>Leave this field empty: <input name="bot-field"></label></p>
+
+          <label class="field">
+            <span>Your Name</span>
+            <input type="text" name="name" required>
+          </label>
+
+          <fieldset class="star-field">
+            <legend>Your Rating</legend>
+            <div class="star-rating">
+              <input type="radio" id="star5" name="rating" value="5" required><label for="star5" title="5 stars">★</label>
+              <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="4 stars">★</label>
+              <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="3 stars">★</label>
+              <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="2 stars">★</label>
+              <input type="radio" id="star1" name="rating" value="1"><label for="star1" title="1 star">★</label>
+            </div>
+          </fieldset>
+
+          <label class="field">
+            <span>Your Review</span>
+            <textarea name="review" rows="4" required></textarea>
+          </label>
+
+          <button type="submit" class="btn btn--gold">Submit Review</button>
+        </form>
+        <p class="review-form-note">Reviews are read and approved by the academy before appearing on this page.</p>
       </div>
     </div>
   </section>
@@ -403,6 +434,7 @@
   <svg width="20" height="20"><use href="#i-arrow-up"/></svg>
 </button>
 
+<script src="assets/reviews-data.js"></script>
 <script src="assets/app.js"></script>
 </body>
 </html>

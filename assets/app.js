@@ -48,6 +48,50 @@
     });
   });
 
+  /* Reviews: render approved reviews, or leave the "no reviews yet" message */
+  var reviewGrid = document.getElementById("review-grid");
+  var reviewsEmptyMessage = document.getElementById("reviews-empty-message");
+  var reviews = window.STUDENT_REVIEWS || [];
+
+  if (reviewGrid && reviews.length) {
+    reviews.forEach(function (review) {
+      var rating = Math.max(0, Math.min(5, Number(review.rating) || 0));
+
+      var card = document.createElement("div");
+      card.className = "review-card";
+
+      var starsEl = document.createElement("div");
+      starsEl.className = "review-stars";
+      starsEl.textContent = "★★★★★☆☆☆☆☆".slice(5 - rating, 10 - rating);
+      starsEl.setAttribute("aria-label", rating + " out of 5 stars");
+
+      var textEl = document.createElement("p");
+      textEl.textContent = "“" + review.text + "”";
+
+      var citeEl = document.createElement("cite");
+      citeEl.textContent = review.name;
+
+      card.append(starsEl, textEl, citeEl);
+      reviewGrid.appendChild(card);
+    });
+
+    reviewGrid.hidden = false;
+    if (reviewsEmptyMessage) reviewsEmptyMessage.hidden = true;
+  }
+
+  /* Write-a-review form toggle */
+  var reviewToggle = document.getElementById("review-toggle");
+  var reviewFormWrap = document.getElementById("review-form-wrap");
+  if (reviewToggle && reviewFormWrap) {
+    reviewToggle.addEventListener("click", function () {
+      var isOpen = !reviewFormWrap.hidden;
+      reviewFormWrap.hidden = isOpen;
+      reviewToggle.setAttribute("aria-expanded", String(!isOpen));
+      reviewToggle.textContent = isOpen ? "Write a Review" : "Cancel";
+      if (!isOpen) reviewFormWrap.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+  }
+
   /* Back-to-top button */
   var backToTop = document.getElementById("back-to-top");
   if (backToTop) {
@@ -61,7 +105,7 @@
 
   /* Scroll reveal for cards/sections */
   var revealTargets = document.querySelectorAll(
-    ".benefit-card, .subject-card, .schedule-card, .tutor-card, .review-placeholder, .accordion-item, .hadith-card"
+    ".benefit-card, .subject-card, .schedule-card, .tutor-card, .review-card, .accordion-item, .hadith-card"
   );
   revealTargets.forEach(function (el) { el.classList.add("reveal"); });
 
