@@ -1,18 +1,12 @@
-const { getStore } = require("@netlify/blobs");
+import { getStore } from "@netlify/blobs";
 
 // Netlify invokes this automatically whenever any Netlify Form on the site
-// receives a submission — https://docs.netlify.com/forms/setup/#submission-created-function
-exports.handler = async (event) => {
-  let body;
-  try {
-    body = JSON.parse(event.body || "{}");
-  } catch (err) {
-    return { statusCode: 400, body: "Bad Request" };
-  }
+// receives a submission — https://docs.netlify.com/build/functions/trigger-on-events/
+export default async (req) => {
+  const { payload } = await req.json();
 
-  const payload = body.payload || {};
-  if (payload.form_name !== "student-review") {
-    return { statusCode: 200, body: "ignored" };
+  if (!payload || payload.form_name !== "student-review") {
+    return new Response(null, { status: 200 });
   }
 
   const data = payload.data || {};
@@ -31,5 +25,5 @@ exports.handler = async (event) => {
   approved.unshift(review);
   await store.setJSON("approved", approved);
 
-  return { statusCode: 200, body: "ok" };
+  return new Response(null, { status: 200 });
 };

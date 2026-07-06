@@ -28,9 +28,9 @@ server — it only works once deployed.
 Like a typical Google-style review widget: a visitor submits the "Write a
 Review" form (name, star rating, text) on the main page. Netlify Forms
 captures it and automatically invokes
-`netlify/functions/submission-created.js`, which stores it directly in
+`netlify/functions/submission-created.mjs`, which stores it directly in
 Netlify Blobs — no approval step. The main page fetches the current list
-from `netlify/functions/reviews-public.js` on load, so a new review shows up
+from `netlify/functions/reviews-public.mjs` on load, so a new review shows up
 immediately for the next visitor, with no rebuild or redeploy needed.
 
 There's no moderation queue, so anything submitted goes live right away
