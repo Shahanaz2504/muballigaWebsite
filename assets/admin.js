@@ -1,6 +1,15 @@
 (function () {
   "use strict";
 
+  // Registration on this site is invite-only, so any token landing here is
+  // an invite completion, never a true self-signup confirmation. Netlify
+  // sometimes issues these as confirmation_token rather than invite_token;
+  // the widget only prompts for a password (required for invited users) on
+  // the invite_token path, so normalize it before init() reads the hash.
+  if (/confirmation_token=/.test(location.hash) && !/invite_token=/.test(location.hash)) {
+    location.hash = location.hash.replace("confirmation_token=", "invite_token=");
+  }
+
   var loginGate = document.getElementById("login-gate");
   var adminPanel = document.getElementById("admin-panel");
   var adminAccount = document.getElementById("admin-account");
