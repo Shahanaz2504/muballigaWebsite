@@ -53,7 +53,7 @@
   var reviewsEmptyMessage = document.getElementById("reviews-empty-message");
 
   if (reviewGrid) {
-    fetch("/.netlify/functions/reviews-public")
+    fetch("/.netlify/functions/reviews-public", { cache: "no-store" })
       .then(function (res) { return res.ok ? res.json() : []; })
       .then(function (reviews) {
         if (!Array.isArray(reviews) || !reviews.length) return;
